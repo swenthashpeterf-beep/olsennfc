@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Pulp Tattoo | NFC Studio Card</title>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    /* Custom dark studio glassmorphism, platform accents, and scrollbar styling */
+    body {
+      background-color: #09090b;
+      color: #fafafa;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .glass-card {
+      background: rgba(24, 24, 27, 0.76);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-subcard {
+      background: rgba(39, 39, 42, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Instagram hover & gradient */
+    .ig-card:hover {
+      border-color: rgba(225, 48, 108, 0.55);
+      box-shadow: 0 12px 32px -10px rgba(225, 48, 108, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .ig-gradient {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .ig-ring {
+      background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+    }
+
+    /* TikTok hover & dual-tone cyan/rose accents */
+    .tt-card:hover {
+      border-color: rgba(0, 242, 234, 0.5);
+      box-shadow: 0 12px 32px -10px rgba(255, 0, 80, 0.24);
+      transform: translateY(-2px);
+    }
+
+    .tt-gradient {
+      background: linear-gradient(135deg, #00f2ea 0%, #111115 48%, #ff0050 100%);
+    }
+
+    .tt-ring {
+      background: linear-gradient(135deg, #00f2ea, #ff0050);
+    }
+
+    /* Facebook hover */
+    .fb-card:hover {
+      border-color: rgba(24, 119, 242, 0.55);
+      box-shadow: 0 12px 32px -10px rgba(24, 119, 242, 0.24);
+      transform: translateY(-2px);
+    }
+
+    /* Subtle dark scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 relative overflow-x-hidden selection:bg-rose-500/30 selection:text-rose-200">
+
+  <!-- Ambient Studio Background Glow Orbs (Crimson & Deep Purple) -->
+  <div class="fixed -top-28 -left-24 w-80 h-80 rounded-full bg-rose-600/20 blur-[110px] pointer-events-none"></div>
+  <div class="fixed -bottom-28 -right-24 w-80 h-80 rounded-full bg-purple-600/20 blur-[110px] pointer-events-none"></div>
+
+  <!-- Main Mobile App-Like Container -->
+  <main class="w-full max-w-[440px] relative z-10 my-auto">
+    <div class="glass-card rounded-[2rem] p-5 sm:p-6 shadow-2xl shadow-black/70 relative overflow-hidden">
+
+      <!-- Top Bar: NFC Status Badge -->
+      <div class="flex items-center justify-center mb-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 text-xs font-medium text-zinc-300 shadow-inner">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <!-- NFC Wave SVG -->
+          <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8.32a7.43 7.43 0 0 1 0 7.36" />
+            <path d="M9.46 6.21a11.76 11.76 0 0 1 0 11.58" />
+            <path d="M12.91 4.1a15.91 15.91 0 0 1 .01 15.8" />
+            <path d="M16.37 2a20.16 20.16 0 0 1 0 20" />
+          </svg>
+          <span>NFC Studio Card</span>
+        </div>
+      </div>
+
+      <!-- Studio Profile Hero Section -->
+      <header class="flex flex-col items-center text-center mb-6">
+        <!-- Circular Studio Logo ("dapulp.jpg" with "TP" monogram fallback) -->
+        <div class="relative mb-4">
+          <div class="p-1 rounded-full bg-gradient-to-tr from-rose-500 via-fuchsia-500 to-purple-600 shadow-lg shadow-rose-500/20 inline-block">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-zinc-900 overflow-hidden relative flex items-center justify-center border-2 border-zinc-950">
+              <!-- TP Monogram Fallback -->
+              <div id="heroAvatarFallback" class="hidden w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-950 text-2xl sm:text-3xl font-display font-extrabold tracking-tight text-white select-none">
+                TP
+              </div>
+              <!-- Place "dapulp.jpg" in the same folder as this HTML file -->
+              <img
+                id="heroAvatarImg"
+                src="dapulp.jpg"
+                alt="The Pulp Tattoo Logo"
+                onerror="this.classList.add('hidden'); document.getElementById('heroAvatarFallback').classList.remove('hidden');"
+                onload="this.classList.remove('hidden'); document.getElementById('heroAvatarFallback').classList.add('hidden');"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Studio Name & Verified Badge -->
+        <div class="flex items-center justify-center gap-1.5 mb-1.5">
+          <h1 class="font-display text-2xl sm:text-[26px] font-bold tracking-tight text-white">
+            The Pulp Tattoo
+          </h1>
+          <svg class="w-5 h-5 text-rose-400 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-label="Verified Studio">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6 12.6l1.5-1.5 2.6 2.6 6.4-6.4 1.5 1.5-7.9 7.9z" />
+          </svg>
+        </div>
+
+        <!-- Studio Tagline -->
+        <p class="text-sm text-zinc-400 max-w-[320px] leading-relaxed">
+          Custom Ink, Fine Line &amp; Tattoo Artistry • Tap to book or view our latest flash &amp; sessions.
+        </p>
+
+        <!-- Primary Quick Actions: Save Studio Contact & Share Card -->
+        <div class="grid grid-cols-2 gap-2.5 w-full mt-5">
+          <button
+            id="saveVcardBtn"
+            type="button"
+            class="flex items-center justify-center gap-2 py-2.5 px-3.5 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-xs sm:text-sm transition-all active:scale-[0.98] shadow-md shadow-white/5"
+          >
+            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <line x1="19" y1="8" x2="19" y2="14" />
+              <line x1="22" y1="11" x2="16" y2="11" />
+            </svg>
+            <span>Save Studio Contact</span>
+          </button>
+
+          <button
+            id="shareCardBtn"
+            type="button"
+            class="flex items-center justify-center gap-2 py-2.5 px-3.5 rounded-2xl bg-zinc-800/90 hover:bg-zinc-800 text-zinc-100 border border-white/10 font-semibold text-xs sm:text-sm transition-all active:scale-[0.98]"
+          >
+            <svg class="w-4 h-4 shrink-0 text-zinc-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            <span>Share Card</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Divider with Label -->
+      <div class="flex items-center gap-3 mb-4">
+        <div class="h-px flex-1 bg-white/10"></div>
+        <span class="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">Studio Socials</span>
+        <div class="h-px flex-1 bg-white/10"></div>
+      </div>
+
+      <!-- Social Profile Cards Stack -->
+      <section class="space-y-4" aria-label="Studio Social Media Profiles">
+
+        <!-- 1. INSTAGRAM PROFILE CARD -->
+        <article class="glass-subcard ig-card rounded-3xl p-4 relative group">
+          <div class="flex items-center justify-between mb-3.5">
+            <div class="inline-flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl ig-gradient flex items-center justify-center text-white shadow-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </span>
+              <span class="text-xs font-semibold tracking-wide text-zinc-300">Instagram</span>
+            </div>
+
+            <button
+              type="button"
+              data-copy="@thepulptattoo"
+              data-copy-label="Instagram handle (@thepulptattoo)"
+              class="copy-btn inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 text-[11px] font-medium text-zinc-300 hover:text-white transition-all active:scale-95"
+              title="Copy @thepulptattoo"
+            >
+              <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              <span>Copy Handle</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="p-[2.5px] rounded-full ig-ring shrink-0">
+              <div class="w-14 h-14 rounded-full bg-zinc-900 border-2 border-zinc-950 overflow-hidden flex items-center justify-center">
+                <span id="igAvatarFallback" class="hidden text-sm font-display font-bold text-white select-none">TP</span>
+                <!-- Place "dapulp.jpg" in the same folder as this HTML file -->
+                <img
+                  src="dapulp.jpg"
+                  alt="The Pulp Tattoo on Instagram"
+                  onerror="this.classList.add('hidden'); document.getElementById('igAvatarFallback').classList.remove('hidden');"
+                  onload="this.classList.remove('hidden'); document.getElementById('igAvatarFallback').classList.add('hidden');"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5">
+                <h2 class="font-display font-bold text-base text-white truncate">The Pulp Tattoo</h2>
+                <span class="text-xs font-medium text-pink-400 truncate">@thepulptattoo</span>
+              </div>
+              <p class="text-xs text-zinc-400 mt-0.5 line-clamp-2 leading-relaxed">
+                Portfolio, Flash Sheets &amp; Studio Updates
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="https://www.instagram.com/thepulptattoo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl ig-gradient text-white font-semibold text-sm shadow-lg shadow-pink-600/20 hover:opacity-95 transition-all active:scale-[0.98]"
+          >
+            <span>Follow / Open Instagram</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        </article>
+
+        <!-- 2. TIKTOK PROFILE CARD -->
+        <article class="glass-subcard tt-card rounded-3xl p-4 relative group">
+          <div class="flex items-center justify-between mb-3.5">
+            <div class="inline-flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl tt-gradient border border-white/10 flex items-center justify-center text-white shadow-sm">
+                <!-- TikTok Note SVG -->
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                </svg>
+              </span>
+              <span class="text-xs font-semibold tracking-wide text-zinc-300">TikTok</span>
+            </div>
+
+            <button
+              type="button"
+              data-copy="@thepulptattoo"
+              data-copy-label="TikTok handle (@thepulptattoo)"
+              class="copy-btn inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 text-[11px] font-medium text-zinc-300 hover:text-white transition-all active:scale-95"
+              title="Copy @thepulptattoo"
+            >
+              <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              <span>Copy Handle</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="p-[2.5px] rounded-full tt-ring shrink-0">
+              <div class="w-14 h-14 rounded-full bg-zinc-900 border-2 border-zinc-950 overflow-hidden flex items-center justify-center">
+                <span id="ttAvatarFallback" class="hidden text-sm font-display font-bold text-white select-none">TP</span>
+                <!-- Place "dapulp.jpg" in the same folder as this HTML file -->
+                <img
+                  src="dapulp.jpg"
+                  alt="The Pulp Tattoo on TikTok"
+                  onerror="this.classList.add('hidden'); document.getElementById('ttAvatarFallback').classList.remove('hidden');"
+                  onload="this.classList.remove('hidden'); document.getElementById('ttAvatarFallback').classList.add('hidden');"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5">
+                <h2 class="font-display font-bold text-base text-white truncate">The Pulp Tattoo</h2>
+                <span class="text-xs font-medium text-cyan-300 truncate">@thepulptattoo</span>
+              </div>
+              <p class="text-xs text-zinc-400 mt-0.5 line-clamp-2 leading-relaxed">
+                Tattoo Reels, Process &amp; Session Clips
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="https://www.tiktok.com/@thepulptattoo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-zinc-950 hover:bg-zinc-900 border border-cyan-400/35 text-white font-semibold text-sm shadow-lg shadow-rose-600/15 transition-all active:scale-[0.98]"
+          >
+            <span>Watch / Open TikTok</span>
+            <svg class="w-4 h-4 text-cyan-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        </article>
+
+        <!-- 3. FACEBOOK PROFILE CARD -->
+        <article class="glass-subcard fb-card rounded-3xl p-4 relative group">
+          <div class="flex items-center justify-between mb-3.5">
+            <div class="inline-flex items-center gap-2">
+              <span class="w-7 h-7 rounded-xl bg-[#1877F2] flex items-center justify-center text-white shadow-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />
+                </svg>
+              </span>
+              <span class="text-xs font-semibold tracking-wide text-zinc-300">Facebook</span>
+            </div>
+
+            <button
+              type="button"
+              data-copy="https://www.facebook.com/profile.php?id=61573532484299"
+              data-copy-label="Facebook page link"
+              class="copy-btn inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/10 text-[11px] font-medium text-zinc-300 hover:text-white transition-all active:scale-95"
+              title="Copy Facebook link"
+            >
+              <svg class="w-3.5 h-3.5 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              <span>Copy Link</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3.5 mb-4">
+            <div class="p-[2.5px] rounded-full bg-gradient-to-tr from-[#1877F2] to-sky-400 shrink-0">
+              <div class="w-14 h-14 rounded-full bg-zinc-900 border-2 border-zinc-950 overflow-hidden flex items-center justify-center">
+                <span id="fbAvatarFallback" class="hidden text-sm font-display font-bold text-white select-none">TP</span>
+                <!-- Place "dapulp.jpg" in the same folder as this HTML file -->
+                <img
+                  src="dapulp.jpg"
+                  alt="The Pulp Tattoo on Facebook"
+                  onerror="this.classList.add('hidden'); document.getElementById('fbAvatarFallback').classList.remove('hidden');"
+                  onload="this.classList.remove('hidden'); document.getElementById('fbAvatarFallback').classList.add('hidden');"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <h2 class="font-display font-bold text-[15px] text-white leading-snug truncate">
+                The Pulp Tattoo
+              </h2>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span class="text-xs font-medium text-sky-400">Official Page</span>
+                <span class="text-zinc-600">•</span>
+                <span class="text-xs text-zinc-400 truncate">Message for Appointments</span>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="https://www.facebook.com/profile.php?id=61573532484299"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-semibold text-sm shadow-lg shadow-blue-600/25 transition-all active:scale-[0.98]"
+          >
+            <span>Visit / Open Facebook</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        </article>
+
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-zinc-500">
+        <span>Tap &amp; Connect NFC</span>
+        <span class="font-medium text-zinc-400">@thepulptattoo</span>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Toast Notification Banner -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300"
+  >
+    <div class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-zinc-900/95 border border-white/15 text-xs sm:text-sm font-medium text-white shadow-xl shadow-black/50 backdrop-blur-md">
+      <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+      <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Interactive Application Logic -->
+  <script>
+    (function () {
+      let toastTimeout = null;
+
+      function showToast(message) {
+        try {
+          const toast = document.getElementById('toast');
+          const toastMessage = document.getElementById('toastMessage');
+          toastMessage.textContent = message;
+
+          toast.classList.remove('opacity-0', 'translate-y-3');
+          toast.classList.add('opacity-100', 'translate-y-0');
+
+          if (toastTimeout) clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toast.classList.remove('opacity-100', 'translate-y-0');
+            toast.classList.add('opacity-0', 'translate-y-3');
+          }, 2600);
+        } catch (err) {
+          // Ignore toast UI errors
+        }
+      }
+
+      // Copy text helper with iframe-safe fallback
+      function copyText(text, label) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        let copied = false;
+        try {
+          copied = document.execCommand('copy');
+        } catch (err) {
+          copied = false;
+        }
+        document.body.removeChild(textarea);
+
+        if (copied) {
+          showToast(`Copied ${label}`);
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showToast(`Copied ${label}`));
+        }
+      }
+
+      // Attach copy handlers
+      document.querySelectorAll('.copy-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          copyText(btn.dataset.copy, btn.dataset.copyLabel);
+        });
+      });
+
+      // Download Studio vCard (.vcf)
+      document.getElementById('saveVcardBtn').addEventListener('click', () => {
+        try {
+          const vcard = [
+            'BEGIN:VCARD',
+            'VERSION:3.0',
+            'N:Tattoo;The Pulp;;;',
+            'FN:The Pulp Tattoo',
+            'ORG:The Pulp Tattoo Studio',
+            'NOTE:Custom Ink, Fine Line & Tattoo Artistry | IG & TikTok: @thepulptattoo',
+            'URL;type=Instagram:https://www.instagram.com/thepulptattoo/',
+            'URL;type=TikTok:https://www.tiktok.com/@thepulptattoo',
+            'URL;type=Facebook:https://www.facebook.com/profile.php?id=61573532484299',
+            'END:VCARD',
+          ].join('\r\n');
+
+          const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'The_Pulp_Tattoo.vcf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+
+          showToast('Studio contact card (.vcf) downloaded!');
+        } catch (err) {
+          showToast('Unable to download studio contact card');
+        }
+      });
+
+      // Share NFC Studio Card link
+      document.getElementById('shareCardBtn').addEventListener('click', async () => {
+        const shareData = {
+          title: 'The Pulp Tattoo | NFC Studio Card',
+          text: 'Connect with The Pulp Tattoo on Instagram, TikTok (@thepulptattoo) & Facebook',
+          url: window.location.href,
+        };
+
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {
+            // User cancelled share sheet
+          }
+        } else {
+          copyText(window.location.href, 'studio NFC card link');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
